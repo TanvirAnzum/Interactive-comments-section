@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container-area {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f6fa;
+  .container {
+    width: 60%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f6fa;
+    &__content {
+      width: 70%;
+      min-height: auto;
+      border-radius: 10px;
+      display: grid;
+      background-color: #ffffff;
+      grid-template-columns: 5em auto auto auto 1fr;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas:
+        "a b c d e"
+        "a f f f f";
+
+      &-rating {
+        grid-area: a;
+        width: 40%;
+        height: 70%;
+        justify-self: center;
+        align-self: start;
+        margin-top: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 0.8em;
+        padding-bottom: 0.8em;
+        background-color: #f5f6fa;
+        border-radius: 5px;
+      }
+      &-img {
+        grid-area: b;
+        justify-self: center;
+        align-self: center;
+        img {
+          max-width: 60%;
+        }
+      }
+      &-name {
+        grid-area: c;
+        justify-self: center;
+        align-self: center;
+        font-weight: 700;
+      }
+
+      &-time {
+        grid-area: d;
+        justify-self: center;
+        align-self: center;
+        margin-left: 1em;
+        color: hsl(225, 80%, 84%);
+        font-weight: 400;
+      }
+      &-replay {
+        grid-area: e;
+        justify-self: end;
+        align-self: center;
+        padding-right: 1em;
+
+        p {
+          display: inline-block;
+          color: hsl(238, 40%, 52%);
+          font-weight: 600;
+        }
+      }
+      &-comment {
+        grid-area: f;
+        width: 90%;
+        padding-bottom: 1em;
+      }
+    }
+  }
+}

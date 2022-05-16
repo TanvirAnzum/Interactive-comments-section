@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Interactive comments section</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+
+    <!-- main css -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container-area">
+      <div class="container">
+        <div class="container__content">
+          <div class="container__content-rating">
+            <img src="./images/icon-plus.svg" alt="plus sign" />
+            <p id="rating">12</p>
+            <img src="./images/icon-minus.svg" alt="minus sign" />
+          </div>
+          <div class="container__content-img">
+            <img
+              src="./images/avatars/image-amyrobson.png"
+              alt="image of amyrobson"
+            />
+          </div>
+          <div class="container__content-name">
+            <p id="user-name">amyrobson</p>
+          </div>
+          <div class="container__content-time">
+            <p id="time">1 month ago</p>
+          </div>
+          <div class="container__content-replay">
+            <img src="./images/icon-reply.svg" alt="" />
+            <p>Replay</p>
+          </div>
+          <div class="container__content-comment">
+            <p id="comment">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt quo
+              voluptatibus, rerum labore perspiciatis omnis expedita officia
+              laboriosam provident quisquam dolor accusantium dolore fuga,
+              doloremque accusamus vero sapiente hic modi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Pull dynamic content from the data.json file -->
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </body>
+</html>
