@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  max-width: 100%;
 }
 
 .container-area {
@@ -22,6 +23,7 @@
     &__content {
       width: 70%;
       min-height: auto;
+      margin-bottom: 1em;
       border-radius: 10px;
       display: grid;
       background-color: #ffffff;
@@ -89,4 +91,10 @@
       }
     }
   }
+}
+
+.reply {
+  margin-top: 2%;
+  margin-left: 10%;
+  max-width: 60%;
 }

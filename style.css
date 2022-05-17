@@ -3,6 +3,7 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  max-width: 100%;
 }
 
 .container-area {
@@ -42,6 +43,7 @@
 .container-area .container__content {
   width: 70%;
   min-height: auto;
+  margin-bottom: 1em;
   border-radius: 10px;
   display: -ms-grid;
   display: grid;
@@ -149,5 +151,11 @@
   grid-area: f;
   width: 90%;
   padding-bottom: 1em;
+}
+
+.reply {
+  margin-top: 2%;
+  margin-left: 10%;
+  max-width: 60%;
 }
 /*# sourceMappingURL=style.css.map */
