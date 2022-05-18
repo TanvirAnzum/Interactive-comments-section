@@ -42,7 +42,7 @@
 
 .container-area .container__content {
   width: 70%;
-  min-height: auto;
+  min-height: 15vh;
   margin-bottom: 1em;
   border-radius: 10px;
   display: -ms-grid;
@@ -61,7 +61,7 @@
   -ms-grid-column: 1;
   grid-area: a;
   width: 40%;
-  height: 70%;
+  height: 60%;
   justify-self: center;
   -ms-flex-item-align: start;
       align-self: start;
@@ -85,6 +85,11 @@
   border-radius: 5px;
 }
 
+.container-area .container__content-rating p {
+  color: #5457b6;
+  font-weight: 700;
+}
+
 .container-area .container__content-img {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
@@ -97,7 +102,7 @@
 }
 
 .container-area .container__content-img img {
-  max-width: 60%;
+  max-width: 70%;
 }
 
 .container-area .container__content-name {
@@ -154,8 +159,95 @@
 }
 
 .reply {
-  margin-top: 2%;
   margin-left: 10%;
   max-width: 60%;
+  position: relative;
+}
+
+.intend-bar {
+  height: 100%;
+  width: 2px;
+  border-left: 1px solid #5457b6;
+  position: absolute;
+  left: -4em;
+  top: 0;
+}
+
+.comment-area {
+  width: 70%;
+  min-height: 15vh;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #ffffff;
+}
+
+.add-comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 90%;
+  min-height: 10vh;
+  gap: 1em;
+}
+
+#main-user-img {
+  display: inline-block;
+  width: 2.8em;
+}
+
+#usr-comment-text {
+  width: 80%;
+  border-radius: 0.5em;
+  border-color: #c3c4ef;
+  padding: 1em;
+}
+
+.btn {
+  width: 8em;
+  height: 3em;
+  background-color: #5457b6;
+  border: none;
+  color: white;
+  border-radius: 0.5em;
+}
+
+.reply-button {
+  border: none;
+  background-color: inherit;
+  padding-left: 5px;
+  color: #5457b6;
+  font-weight: 600;
+}
+
+::-webkit-input-placeholder {
+  font-size: 1.2em;
+  padding: 1em;
+}
+
+:-ms-input-placeholder {
+  font-size: 1.2em;
+  padding: 1em;
+}
+
+::-ms-input-placeholder {
+  font-size: 1.2em;
+  padding: 1em;
+}
+
+::placeholder {
+  font-size: 1.2em;
+  padding: 1em;
 }
 /*# sourceMappingURL=style.css.map */

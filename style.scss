@@ -22,7 +22,7 @@
     background-color: #f5f6fa;
     &__content {
       width: 70%;
-      min-height: auto;
+      min-height: 15vh;
       margin-bottom: 1em;
       border-radius: 10px;
       display: grid;
@@ -36,7 +36,7 @@
       &-rating {
         grid-area: a;
         width: 40%;
-        height: 70%;
+        height: 60%;
         justify-self: center;
         align-self: start;
         margin-top: 1em;
@@ -48,14 +48,20 @@
         padding-bottom: 0.8em;
         background-color: #f5f6fa;
         border-radius: 5px;
+
+        p {
+          color: hsl(238, 40%, 52%);
+          font-weight: 700;
+        }
       }
       &-img {
         grid-area: b;
         justify-self: center;
         align-self: center;
         img {
-          max-width: 60%;
+          max-width: 70%;
         }
+        // border: 1px solid tomato;
       }
       &-name {
         grid-area: c;
@@ -94,7 +100,70 @@
 }
 
 .reply {
-  margin-top: 2%;
   margin-left: 10%;
   max-width: 60%;
+  position: relative;
+}
+
+.intend-bar {
+  height: 100%;
+  width: 2px;
+  border-left: 1px solid hsl(238, 40%, 52%);
+  position: absolute;
+  left: -4em;
+  top: 0;
+}
+
+.comment-area {
+  width: 70%;
+  min-height: 15vh;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.add-comment {
+  display: flex;
+  align-items: flex-start;
+  width: 90%;
+  min-height: 10vh;
+
+  gap: 1em;
+}
+
+#main-user-img {
+  display: inline-block;
+  width: 2.8em;
+}
+
+#usr-comment-text {
+  width: 80%;
+  border-radius: 0.5em;
+  border-color: hsl(239, 57%, 85%);
+  padding: 1em;
+}
+
+.btn {
+  width: 8em;
+  height: 3em;
+  background-color: hsl(238, 40%, 52%);
+  border: none;
+  color: white;
+  border-radius: 0.5em;
+}
+
+.reply-button {
+  border: none;
+  background-color: inherit;
+  padding-left: 5px;
+  color: hsl(238, 40%, 52%);
+  font-weight: 600;
+}
+
+::placeholder {
+  font-size: 1.2em;
+  padding: 1em;
 }

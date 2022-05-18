@@ -1,120 +1,199 @@
-
-fetch('./data.json').then(response =>  {
+fetch("./data.json")
+  .then((response) => {
     return response.json();
-}).then(json =>{
-   let data = json;
-    userInfo(data.currentUser);
+  })
+  .then((json) => {
+    let data = json;
+
     comments(data.comments);
+    userInfo(data.currentUser);
     // console.log(data);
-});
+  });
 
 function userInfo(user) {
-    // console.log(user);
-    // console.log(user.image);
+  // console.log(user.username);
+  console.log(user.image);
+  addComment(user.image.webp, 'null');
 }
 
 function comments(comment) {
-    console.log(comment);
-    for(let i=0;i<comment.length;i++) {
-        let usr = comment[i].user;
-        console.log(usr);
-        let image = usr.image;
-        elm(comment[i].score,image.png,usr.username,comment[i].createdAt,comment[i].content,false);
-        let replies = comment[i].replies;
-        console.log(replies);
-        for(let i=0;i<replies.length;i++) {
-            console.log(replies[i]);
-            let r_usr = replies[i].user;
-            let r_img = r_usr.image;
-            elm(replies[i].score,r_img.png,r_usr.username,replies[i].createdAt,replies[i].content,true);
-        }
+  let comment_div_count = 0;
+  for (let i = 0; i < comment.length; i++) {
+    let usr = comment[i].user;
+    comment_div_count++;
+    let image = usr.image;
+    elm(
+      comment[i].score,
+      image.png,
+      usr.username,
+      comment[i].createdAt,
+      comment[i].content,
+      false,comment_div_count
+    );
+    let replies = comment[i].replies;
+    // console.log(replies);
+    
+    for (let i = 0; i < replies.length; i++) {
+        comment_div_count++;
+      let r_usr = replies[i].user;
+      let r_img = r_usr.image;
+      elm(
+        replies[i].score,
+        r_img.png,
+        r_usr.username,
+        replies[i].createdAt,
+        replies[i].content,
+        true,comment_div_count
+      );
     }
+  }
 }
 
-function elm(score,source,usrname,time,content,is_reply) 
-{
-    let main_div = document.createElement('div'); 
-    main_div.classList.add('container__content');
-    if(is_reply) {
-        main_div.classList.add('reply');
-    }
-    /// score section
+function elm(score, source, usrname, time, content, is_reply, current_user) {
+  let main_div = document.createElement("div");
+  main_div.id = "current-user-" + current_user;
+  main_div.classList.add("container__content");
+  if (is_reply) {
+    main_div.classList.add("reply");
     {
-    let div = document.createElement('div');
-    div.classList.add('container__content-rating');
-    let img = document.createElement('img');
-    img.src="./images/icon-plus.svg";
+      let div = document.createElement("div");
+      div.classList.add("intend-bar");
+      main_div.appendChild(div);
+    }
+    
+  }
+  /// score section
+  {
+    let div = document.createElement("div");
+    div.classList.add("container__content-rating");
+    let img = document.createElement("img");
+    img.src = "./images/icon-plus.svg";
     div.appendChild(img);
-    let p = document.createElement('p');
-    p.id =  'rating';
+    let p = document.createElement("p");
+    p.id = "rating";
     p.innerHTML = score;
     div.appendChild(p);
-    let img2 = document.createElement('img');
-    img2.src="./images/icon-minus.svg";
+    let img2 = document.createElement("img");
+    img2.src = "./images/icon-minus.svg";
     div.appendChild(img2);
     main_div.appendChild(div);
+  }
+
+  //profile image section
+  {
+    let div = document.createElement("div");
+    div.classList.add("container__content-img");
+    let img = document.createElement("img");
+    img.src = source;
+    div.appendChild(img);
+    main_div.appendChild(div);
+  }
+
+  //user name section
+
+  {
+    let div = document.createElement("div");
+    div.classList.add("container__content-name");
+    let p = document.createElement("p");
+    p.id = "user-name";
+    p.innerHTML = usrname;
+    div.appendChild(p);
+    main_div.appendChild(div);
+  }
+
+  //time section
+
+  {
+    let div = document.createElement("div");
+    div.classList.add("container__content-time");
+    let p = document.createElement("p");
+    p.id = "time";
+    p.innerHTML = time;
+    div.appendChild(p);
+    main_div.appendChild(div);
+  }
+
+  //replay
+
+  {
+    let div = document.createElement("div");
+    div.classList.add("container__content-replay");
+    let img = document.createElement("img");
+    img.src = "./images/icon-reply.svg";
+    let p = document.createElement("button");
+    p.classList.add('reply-button');
+    p.id = "reply-button-" + current_user;
+    p.innerHTML = "Replay";
+    p.setAttribute('onclick','replay_btn_toggle(this)');
+    div.appendChild(img);
+    div.appendChild(p);
+    main_div.appendChild(div);
+  }
+
+  // comment
+
+  {
+    let div = document.createElement("div");
+    div.classList.add("container__content-comment");
+    let p = document.createElement("p");
+    p.id = "comment";
+    p.innerHTML = content;
+    div.appendChild(p);
+    main_div.appendChild(div);
+  }
+
+  document.getElementsByClassName("container")[0].appendChild(main_div);
+}
+
+function addComment(source, parentnode) {
+  let comment_area = document.createElement("div");
+  comment_area.classList.add("comment-area");
+
+  let main_div = document.createElement("div");
+  main_div.classList.add("add-comment");
+
+  let img = document.createElement("img");
+  img.src = source;
+  img.id = "main-user-img";
+  main_div.appendChild(img);
+
+  let text_area = document.createElement("textarea");
+  text_area.id = "usr-comment-text";
+  text_area.setAttribute("rows", "6");
+  text_area.setAttribute("placeholder", "Add a comment...");
+  main_div.appendChild(text_area);
+
+  let btn = document.createElement("button");
+  btn.innerHTML = "SEND";
+  btn.classList.add("btn");
+  btn.id = "submit-btn";
+  main_div.appendChild(btn);
+
+  comment_area.appendChild(main_div);
+  let x = document.getElementsByClassName("container")[0];
+//   x.appendChild(comment_area);
+  if(parentnode != 'null') {
+       insertAfter(parentnode,x.appendChild(comment_area)); 
+  }
+  else {
+    x.appendChild(comment_area);
+  }
+}
+
+function replay_btn_toggle(reply) {
+    // addComment('/images/icon-delete.svg');
+    let r_parent = reply.parentNode;
+    r_parent = r_parent.parentNode;
+    console.log(r_parent.id);
+
+    ///comment area remove
+    let c_area = document.getElementsByClassName('comment-area');
+    for(let i=0;i<c_area.length;i++) {
+        c_area[i].style.display = "none";
     }
+    addComment('./images/avatars/image-maxblagun.png', r_parent);
+}
 
-    //profile image section
-    {
-        let div = document.createElement('div');
-        div.classList.add('container__content-img');
-        let img = document.createElement('img');
-        img.src= source;
-        div.appendChild(img);
-        main_div.appendChild(div);
-    }
-
-    //user name section
-
-    {
-        let div = document.createElement('div');
-        div.classList.add('container__content-name');
-        let p = document.createElement('p');
-        p.id =  'user-name';
-        p.innerHTML = usrname;
-        div.appendChild(p);
-        main_div.appendChild(div);
-    }
-
-
-    //time section
-    
-    {
-        let div = document.createElement('div');
-        div.classList.add('container__content-time');
-        let p = document.createElement('p');
-        p.id =  'time';
-        p.innerHTML = time;
-        div.appendChild(p);
-        main_div.appendChild(div); 
-    }
-
-    //replay
-
-    {
-        let div = document.createElement('div');
-        div.classList.add('container__content-replay');
-        let img = document.createElement('img');
-        img.src= "./images/icon-reply.svg";
-        let p = document.createElement('p');
-        p.innerHTML = "Replay";
-        div.appendChild(img);
-        div.appendChild(p);
-        main_div.appendChild(div);
-    }
-
-    // comment 
-
-    {
-        let div = document.createElement('div');
-        div.classList.add('container__content-comment');
-        let p = document.createElement('p');
-        p.id =  'comment';
-        p.innerHTML = content;
-        div.appendChild(p);
-        main_div.appendChild(div);
-    }
-
-    document.getElementsByClassName('container')[0].appendChild(main_div);
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
