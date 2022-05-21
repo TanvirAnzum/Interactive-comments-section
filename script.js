@@ -17,10 +17,15 @@ function userInfo(user) {
 }
 
 function comments(comment) {
-  let comment_div_count = 0;
+  let comment_div_count = '0';
   for (let i = 0; i < comment.length; i++) {
     let usr = comment[i].user;
     comment_div_count++;
+
+    /// this is for checking how many replies the comment have
+    let replies = comment[i].replies;
+    let no_of_replies = replies.length;
+
     let image = usr.image;
     elm(
       comment[i].score,
@@ -28,28 +33,29 @@ function comments(comment) {
       usr.username,
       comment[i].createdAt,
       comment[i].content,
-      false,comment_div_count
+      false,comment_div_count,no_of_replies
     );
-    let replies = comment[i].replies;
+    
     // console.log(replies);
     
     for (let i = 0; i < replies.length; i++) {
         comment_div_count++;
       let r_usr = replies[i].user;
       let r_img = r_usr.image;
+      no_of_replies = 0;
       elm(
         replies[i].score,
         r_img.png,
         r_usr.username,
         replies[i].createdAt,
         replies[i].content,
-        true,comment_div_count
+        true,comment_div_count,no_of_replies
       );
     }
   }
 }
 
-function elm(score, source, usrname, time, content, is_reply, current_user) {
+function elm(score, source, usrname, time, content, is_reply, current_user, no_of_replies) {
   let main_div = document.createElement("div");
   main_div.id = "current-user-" + current_user;
   main_div.classList.add("container__content");
@@ -124,7 +130,11 @@ function elm(score, source, usrname, time, content, is_reply, current_user) {
     p.classList.add('reply-button');
     p.id = "reply-button-" + current_user;
     p.innerHTML = "Replay";
-    p.setAttribute('onclick','replay_btn_toggle(this)');
+    p.setAttribute('value',no_of_replies);
+    if(is_reply) {
+      p.setAttribute('onclick','replay_btn_toggle(this,true)');
+    }
+    else p.setAttribute('onclick','replay_btn_toggle(this,false)');
     div.appendChild(img);
     div.appendChild(p);
     main_div.appendChild(div);
@@ -145,9 +155,10 @@ function elm(score, source, usrname, time, content, is_reply, current_user) {
   document.getElementsByClassName("container")[0].appendChild(main_div);
 }
 
-function addComment(source, parentnode) {
+function addComment(source, parentnode,is_reply) {
   let comment_area = document.createElement("div");
   comment_area.classList.add("comment-area");
+  if(is_reply) comment_area.classList.add('reply'); 
 
   let main_div = document.createElement("div");
   main_div.classList.add("add-comment");
@@ -173,6 +184,7 @@ function addComment(source, parentnode) {
   let x = document.getElementsByClassName("container")[0];
 //   x.appendChild(comment_area);
   if(parentnode != 'null') {
+       //console.log(parentnode.id);
        insertAfter(parentnode,x.appendChild(comment_area)); 
   }
   else {
@@ -180,18 +192,23 @@ function addComment(source, parentnode) {
   }
 }
 
-function replay_btn_toggle(reply) {
+function replay_btn_toggle(reply, is_reply) {
     // addComment('/images/icon-delete.svg');
+    let comment_count = reply.value;
+    // console.log(comment_count);
     let r_parent = reply.parentNode;
     r_parent = r_parent.parentNode;
-    console.log(r_parent.id);
-
+    let id = r_parent.id;
+    let num = id.replace(/\D/g,'');
+    let new_num = parseInt(num) + parseInt(comment_count);
+    let new_parent = document.getElementById('current-user-' + new_num);
+    console.log(new_parent);
     ///comment area remove
     let c_area = document.getElementsByClassName('comment-area');
     for(let i=0;i<c_area.length;i++) {
         c_area[i].style.display = "none";
     }
-    addComment('./images/avatars/image-maxblagun.png', r_parent);
+    addComment('./images/avatars/image-juliusomo.png', new_parent, is_reply);
 }
 
 function insertAfter(referenceNode, newNode) {
