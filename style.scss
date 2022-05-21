@@ -90,10 +90,34 @@
           font-weight: 600;
         }
       }
+      &-replay:hover {
+        cursor: pointer;
+      }
+
       &-comment {
         grid-area: f;
         width: 90%;
         padding-bottom: 1em;
+      }
+      .user-buttons {
+        grid-area: e;
+        justify-self: end;
+        align-self: center;
+        button {
+          margin-right: 1em;
+          width: 5em;
+          border: none;
+          background-color: inherit;
+          font-size: 0.8em;
+          font-weight: 600;
+        }
+
+        button:nth-child(1) {
+          color: hsl(358, 79%, 66%);
+        }
+        button:nth-child(2) {
+          color: hsl(238, 40%, 52%);
+        }
       }
     }
   }
@@ -165,5 +189,14 @@
 
 ::placeholder {
   font-size: 1.2em;
-  padding: 1em;
+  padding: 0.5em;
+}
+
+textarea:focus::placeholder {
+  color: transparent;
+}
+
+.mention {
+  color: hsl(238, 40%, 52%);
+  font-weight: 600;
 }

@@ -52,7 +52,7 @@
       grid-template-columns: 5em auto auto auto 1fr;
   -ms-grid-rows: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
-      grid-template-areas: "a b c d e" "a f f f f";
+      grid-template-areas: "a b c d e" "a f f f f";
 }
 
 .container-area .container__content-rating {
@@ -149,6 +149,10 @@
   font-weight: 600;
 }
 
+.container-area .container__content-replay:hover {
+  cursor: pointer;
+}
+
 .container-area .container__content-comment {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
@@ -156,6 +160,34 @@
   grid-area: f;
   width: 90%;
   padding-bottom: 1em;
+}
+
+.container-area .container__content .user-buttons {
+  -ms-grid-row: 1;
+  -ms-grid-column: 5;
+  grid-area: e;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.container-area .container__content .user-buttons button {
+  margin-right: 1em;
+  width: 5em;
+  border: none;
+  background-color: inherit;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.container-area .container__content .user-buttons button:nth-child(1) {
+  color: #ed6468;
+}
+
+.container-area .container__content .user-buttons button:nth-child(2) {
+  color: #5457b6;
 }
 
 .reply {
@@ -233,21 +265,42 @@
 
 ::-webkit-input-placeholder {
   font-size: 1.2em;
-  padding: 1em;
+  padding: 0.5em;
 }
 
 :-ms-input-placeholder {
   font-size: 1.2em;
-  padding: 1em;
+  padding: 0.5em;
 }
 
 ::-ms-input-placeholder {
   font-size: 1.2em;
-  padding: 1em;
+  padding: 0.5em;
 }
 
 ::placeholder {
   font-size: 1.2em;
-  padding: 1em;
+  padding: 0.5em;
+}
+
+textarea:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+textarea:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+textarea:focus::-ms-input-placeholder {
+  color: transparent;
+}
+
+textarea:focus::placeholder {
+  color: transparent;
+}
+
+.mention {
+  color: #5457b6;
+  font-weight: 600;
 }
 /*# sourceMappingURL=style.css.map */

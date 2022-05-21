@@ -11,7 +11,7 @@ fetch("./data.json")
   });
 
 function userInfo(user) {
-  // console.log(user.username);
+  console.log(user);
   console.log(user.image);
   addComment(user.image.webp, 'null');
 }
@@ -33,7 +33,7 @@ function comments(comment) {
       usr.username,
       comment[i].createdAt,
       comment[i].content,
-      false,comment_div_count,no_of_replies
+      0,comment_div_count,no_of_replies
     );
     
     // console.log(replies);
@@ -49,7 +49,7 @@ function comments(comment) {
         r_usr.username,
         replies[i].createdAt,
         replies[i].content,
-        true,comment_div_count,no_of_replies
+        usr.username,comment_div_count,no_of_replies
       );
     }
   }
@@ -121,7 +121,20 @@ function elm(score, source, usrname, time, content, is_reply, current_user, no_o
 
   //replay
 
-  {
+  if(usrname == "juliusomo") {
+    let div = document.createElement("div");
+    div.classList.add("user-buttons");
+    let btn1 = document.createElement('button')
+    btn1.id = 'delete-btn';
+    btn1.innerHTML = '<i class="fa-solid fa-trash"></i> Delete';
+    div.appendChild(btn1);
+    let btn2 = document.createElement('button')
+    btn2.id = 'edit-btn';
+    btn2.innerHTML = '<i class="fa-solid fa-pencil"></i> Edit';
+    div.appendChild(btn2);
+    main_div.appendChild(div);
+  }
+  else {
     let div = document.createElement("div");
     div.classList.add("container__content-replay");
     let img = document.createElement("img");
@@ -147,7 +160,16 @@ function elm(score, source, usrname, time, content, is_reply, current_user, no_o
     div.classList.add("container__content-comment");
     let p = document.createElement("p");
     p.id = "comment";
-    p.innerHTML = content;
+    if(is_reply) {
+      // let span = document.createElement('span');
+      // span.classList.add('mention');
+      // span.id = 'span-mention';
+      // span.innerHTML = '@' + is_reply + ' ';
+      let span = "<span class='mention'>@ " + is_reply + " </span>";
+      p.innerHTML = span + content;
+      
+    }
+    else p.innerHTML = content;
     div.appendChild(p);
     main_div.appendChild(div);
   }
