@@ -6,6 +6,10 @@
   max-width: 100%;
 }
 
+body {
+  position: relative;
+}
+
 .container-area {
   width: 100vw;
   min-height: 100vh;
@@ -61,7 +65,7 @@
   -ms-grid-column: 1;
   grid-area: a;
   width: 40%;
-  height: 60%;
+  height: 5em;
   justify-self: center;
   -ms-flex-item-align: start;
       align-self: start;
@@ -147,10 +151,6 @@
   display: inline-block;
   color: #5457b6;
   font-weight: 600;
-}
-
-.container-area .container__content-replay:hover {
-  cursor: pointer;
 }
 
 .container-area .container__content-comment {
@@ -302,5 +302,88 @@ textarea:focus::placeholder {
 .mention {
   color: #5457b6;
   font-weight: 600;
+}
+
+.name-style {
+  padding-bottom: 0.2em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  color: white;
+  background-color: #5457b6;
+}
+
+.modal-area {
+  width: 22em;
+  max-height: 40%;
+  background-color: white;
+  border-radius: 0.5em;
+  position: absolute;
+  display: none;
+}
+
+.modal-area .modal {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin-inline: auto;
+  width: 90%;
+  height: 90%;
+}
+
+.modal-area .modal h1 {
+  font-size: 1.5em;
+  font-weight: 600;
+  padding-bottom: 0.8em;
+}
+
+.modal-area .modal p {
+  font-size: 1em;
+  padding-bottom: 1.5em;
+  color: #94959a;
+}
+
+.modal-area .modal .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.modal-area .modal button {
+  height: 3em;
+  width: 11em;
+  margin-bottom: 0.8em;
+  border-radius: 0.8em;
+  border: none;
+  color: white;
+}
+
+.modal-area .modal button:nth-child(1) {
+  background-color: #94959a;
+}
+
+.modal-area .modal button:last-child {
+  background-color: #ed6468;
+}
+
+#edited-comment {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.update-btn {
+  height: 3em;
+  width: 14em;
+  background-color: #5457b6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  left: 30em;
+  margin-bottom: 1em;
 }
 /*# sourceMappingURL=style.css.map */

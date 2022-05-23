@@ -1,3 +1,7 @@
+let flag = 0;
+/// this is for evaluationg how many times button is pressed . this is only for comment update button
+
+
 fetch("./data.json")
   .then((response) => {
     return response.json();
@@ -11,8 +15,6 @@ fetch("./data.json")
   });
 
 function userInfo(user) {
-  console.log(user);
-  console.log(user.image);
   addComment(user.image.webp, 'null');
 }
 
@@ -75,6 +77,7 @@ function elm(score, source, usrname, time, content, is_reply, current_user, no_o
     let img = document.createElement("img");
     img.src = "./images/icon-plus.svg";
     div.appendChild(img);
+    hover_event(img);
     let p = document.createElement("p");
     p.id = "rating";
     p.innerHTML = score;
@@ -82,6 +85,7 @@ function elm(score, source, usrname, time, content, is_reply, current_user, no_o
     let img2 = document.createElement("img");
     img2.src = "./images/icon-minus.svg";
     div.appendChild(img2);
+    hover_event(img2);
     main_div.appendChild(div);
   }
 
@@ -101,8 +105,10 @@ function elm(score, source, usrname, time, content, is_reply, current_user, no_o
     let div = document.createElement("div");
     div.classList.add("container__content-name");
     let p = document.createElement("p");
+    
     p.id = "user-name";
-    p.innerHTML = usrname;
+    if(usrname == "juliusomo") p.innerHTML = usrname + " <span class='name-style'>you</span>";
+    else p.innerHTML = usrname;
     div.appendChild(p);
     main_div.appendChild(div);
   }
@@ -119,40 +125,7 @@ function elm(score, source, usrname, time, content, is_reply, current_user, no_o
     main_div.appendChild(div);
   }
 
-  //replay
-
-  if(usrname == "juliusomo") {
-    let div = document.createElement("div");
-    div.classList.add("user-buttons");
-    let btn1 = document.createElement('button')
-    btn1.id = 'delete-btn';
-    btn1.innerHTML = '<i class="fa-solid fa-trash"></i> Delete';
-    div.appendChild(btn1);
-    let btn2 = document.createElement('button')
-    btn2.id = 'edit-btn';
-    btn2.innerHTML = '<i class="fa-solid fa-pencil"></i> Edit';
-    div.appendChild(btn2);
-    main_div.appendChild(div);
-  }
-  else {
-    let div = document.createElement("div");
-    div.classList.add("container__content-replay");
-    let img = document.createElement("img");
-    img.src = "./images/icon-reply.svg";
-    let p = document.createElement("button");
-    p.classList.add('reply-button');
-    p.id = "reply-button-" + current_user;
-    p.innerHTML = "Replay";
-    p.setAttribute('value',no_of_replies);
-    if(is_reply) {
-      p.setAttribute('onclick','replay_btn_toggle(this,true)');
-    }
-    else p.setAttribute('onclick','replay_btn_toggle(this,false)');
-    div.appendChild(img);
-    div.appendChild(p);
-    main_div.appendChild(div);
-  }
-
+ 
   // comment
 
   {
@@ -161,10 +134,7 @@ function elm(score, source, usrname, time, content, is_reply, current_user, no_o
     let p = document.createElement("p");
     p.id = "comment";
     if(is_reply) {
-      // let span = document.createElement('span');
-      // span.classList.add('mention');
-      // span.id = 'span-mention';
-      // span.innerHTML = '@' + is_reply + ' ';
+      
       let span = "<span class='mention'>@ " + is_reply + " </span>";
       p.innerHTML = span + content;
       
@@ -174,13 +144,64 @@ function elm(score, source, usrname, time, content, is_reply, current_user, no_o
     main_div.appendChild(div);
   }
 
+   //replay
+
+   if(usrname == "juliusomo") {
+    let div = document.createElement("div");
+    div.classList.add("user-buttons");
+    let btn1 = document.createElement('button')
+    btn1.id = 'delete-btn';
+    btn1.innerHTML = '<i class="fa-solid fa-trash"></i> Delete';
+    div.appendChild(btn1);
+    /// button clicking works
+
+    btn1.addEventListener('click', delete_event);
+    hover_event(btn1);
+
+
+    let btn2 = document.createElement('button')
+    btn2.id = 'edit-btn';
+    btn2.innerHTML = '<i class="fa-solid fa-pencil"></i> Edit';
+    btn2.setAttribute('onclick' , 'edit_event(this)');
+    div.appendChild(btn2);
+    main_div.appendChild(div);
+    hover_event(btn2);
+  }
+  else {
+    let div = document.createElement("div");
+    div.classList.add("container__content-replay");
+    let img = document.createElement("img");
+    img.src = "./images/icon-reply.svg";
+    let p = document.createElement("button");
+    p.classList.add('reply-button');
+    p.id = "reply-button-" + current_user;
+    p.innerHTML = "Reply";
+    p.setAttribute('value',no_of_replies);
+    if(is_reply) {
+      p.setAttribute('onclick','replay_btn_toggle(this,true)');
+    }
+    else p.setAttribute('onclick','replay_btn_toggle(this,false)');
+    hover_event(p);
+    hover_event(img);
+    div.appendChild(img);
+    div.appendChild(p);
+    main_div.appendChild(div);
+    hover_event(div);
+  }
+
+
   document.getElementsByClassName("container")[0].appendChild(main_div);
 }
 
 function addComment(source, parentnode,is_reply) {
   let comment_area = document.createElement("div");
   comment_area.classList.add("comment-area");
-  if(is_reply) comment_area.classList.add('reply'); 
+  if(is_reply) {
+    comment_area.classList.add('reply');
+    let div = document.createElement("div");
+    div.classList.add("intend-bar");
+    comment_area.appendChild(div);
+  } 
 
   let main_div = document.createElement("div");
   main_div.classList.add("add-comment");
@@ -195,13 +216,14 @@ function addComment(source, parentnode,is_reply) {
   text_area.setAttribute("rows", "6");
   text_area.setAttribute("placeholder", "Add a comment...");
   main_div.appendChild(text_area);
-
+  hover_event(text_area);
   let btn = document.createElement("button");
-  btn.innerHTML = "SEND";
+  if(is_reply) btn.innerHTML = "REPLY";
+  else btn.innerHTML = "SEND";
   btn.classList.add("btn");
   btn.id = "submit-btn";
   main_div.appendChild(btn);
-
+  hover_event(btn);
   comment_area.appendChild(main_div);
   let x = document.getElementsByClassName("container")[0];
 //   x.appendChild(comment_area);
@@ -233,6 +255,63 @@ function replay_btn_toggle(reply, is_reply) {
     addComment('./images/avatars/image-juliusomo.png', new_parent, is_reply);
 }
 
+
+
 function insertAfter(referenceNode, newNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+
+
+/// detete button press event 
+
+function delete_event() {
+  document.getElementsByClassName('modal-area')[0].style.display = 'block';
+  document.getElementsByClassName('container')[0].style.opacity = 0.2;
+  document.getElementById('cancel-btn').addEventListener('click', ()=> {
+    document.getElementsByClassName('modal-area')[0].style.display = 'none';
+    document.getElementsByClassName('container')[0].style.opacity = 1;
+  });
+  document.getElementById('confirm-btn').addEventListener('click', ()=> {
+    document.getElementsByClassName('modal-area')[0].style.display = 'none';
+    document.getElementsByClassName('container')[0].style.opacity = 1;
+  })
+}
+
+
+// edit button events
+
+
+function edit_event(node) {
+  if(flag>0) return;
+  let btns = node.parentNode;
+  let main_div = btns.parentNode;
+  let comment_area = main_div.childNodes[5];
+  let exixting_comment = comment_area.textContent;
+  comment_area.removeChild(comment_area.childNodes[0]);
+  let text_area = document.createElement('textarea');
+  hover_event(text_area);
+  text_area.innerHTML = exixting_comment;
+  text_area.id = "edited-comment";
+  text_area.setAttribute("rows", "6");
+  comment_area.appendChild(text_area);
+  let update_btn = document.createElement('button');
+  update_btn.classList.add('update-btn');
+  update_btn.innerHTML = "Update";
+  main_div.appendChild(update_btn);
+  hover_event(update_btn);
+  update_btn.addEventListener('click', ()=> {
+   location.reload();
+  })
+  flag++;
+}
+
+
+
+///hover event 
+
+function hover_event(node) {
+  node.addEventListener('mouseenter', ()=> {
+    node.style.cursor = 'pointer';
+  })
 }

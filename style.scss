@@ -5,6 +5,10 @@
   max-width: 100%;
 }
 
+body {
+  position: relative;
+}
+
 .container-area {
   width: 100vw;
   min-height: 100vh;
@@ -36,7 +40,7 @@
       &-rating {
         grid-area: a;
         width: 40%;
-        height: 60%;
+        height: 5em;
         justify-self: center;
         align-self: start;
         margin-top: 1em;
@@ -89,9 +93,6 @@
           color: hsl(238, 40%, 52%);
           font-weight: 600;
         }
-      }
-      &-replay:hover {
-        cursor: pointer;
       }
 
       &-comment {
@@ -199,4 +200,81 @@ textarea:focus::placeholder {
 .mention {
   color: hsl(238, 40%, 52%);
   font-weight: 600;
+}
+
+.name-style {
+  padding-bottom: 0.2em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  color: white;
+  background-color: hsl(238, 40%, 52%);
+}
+
+///modal
+
+.modal-area {
+  width: 22em;
+  max-height: 40%;
+  background-color: white;
+  border-radius: 0.5em;
+  position: absolute;
+  display: none;
+  .modal {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-inline: auto;
+    width: 90%;
+    height: 90%;
+
+    h1 {
+      font-size: 1.5em;
+      font-weight: 600;
+      padding-bottom: 0.8em;
+    }
+    p {
+      font-size: 1em;
+      padding-bottom: 1.5em;
+      color: #94959a;
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    button {
+      height: 3em;
+      width: 11em;
+      margin-bottom: 0.8em;
+      border-radius: 0.8em;
+      border: none;
+      color: white;
+    }
+
+    button:nth-child(1) {
+      background-color: #94959a;
+    }
+
+    button:last-child {
+      background-color: hsl(358, 79%, 66%);
+    }
+  }
+}
+
+#edited-comment {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.update-btn {
+  height: 3em;
+  width: 14em;
+  background-color: hsl(238, 40%, 52%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  left: min(41em, 30em);
+  margin-bottom: 1em;
 }
