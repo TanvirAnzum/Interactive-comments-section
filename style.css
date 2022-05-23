@@ -1,9 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   max-width: 100%;
+  font-family: "Rubik", sans-serif;
 }
 
 body {
@@ -54,9 +56,8 @@ body {
   background-color: #ffffff;
   -ms-grid-columns: 5em auto auto auto 1fr;
       grid-template-columns: 5em auto auto auto 1fr;
-  -ms-grid-rows: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      grid-template-areas: "a b c d e" "a f f f f";
+  grid-auto-rows: auto;
+      grid-template-areas: "a b c d e" "a f f f f" ". . . . g";
 }
 
 .container-area .container__content-rating {
@@ -131,7 +132,7 @@ body {
       -ms-grid-row-align: center;
       align-self: center;
   margin-left: 1em;
-  color: #b6c6f7;
+  color: #67727e;
   font-weight: 400;
 }
 
@@ -160,6 +161,7 @@ body {
   grid-area: f;
   width: 90%;
   padding-bottom: 1em;
+  color: #67727e;
 }
 
 .container-area .container__content .user-buttons {
@@ -373,17 +375,23 @@ textarea:focus::placeholder {
 #edited-comment {
   width: 100%;
   border-radius: 5px;
+  color: #67727e;
 }
 
 .update-btn {
+  -ms-grid-row: 3;
+  -ms-grid-column: 5;
+  grid-area: g;
+  display: block;
   height: 3em;
-  width: 14em;
+  width: 8em;
   background-color: #5457b6;
   color: white;
   border: none;
   border-radius: 5px;
-  position: relative;
-  left: 30em;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  margin-right: 20%;
   margin-bottom: 1em;
 }
 /*# sourceMappingURL=style.css.map */
