@@ -139,7 +139,7 @@ body {
 .intend-bar {
   height: 100%;
   width: 2px;
-  border-left: 1px solid hsl(238, 40%, 52%);
+  border-left: 1px solid hsl(239, 57%, 85%);
   position: absolute;
   left: -4em;
   top: 0;
@@ -289,4 +289,111 @@ textarea:focus::placeholder {
   justify-self: end;
   margin-right: 20%;
   margin-bottom: 1em;
+}
+
+@media all and (max-width: 375px) {
+  .container-area {
+    .container {
+      width: 96%;
+      margin-top: 1em;
+      &__content {
+        width: 96%;
+        min-height: 18vh;
+        grid-template-columns: auto auto auto auto auto;
+        // grid-template-rows: 1fr 1fr;
+        grid-auto-rows: auto;
+        grid-template-areas:
+          "b c d d d"
+          "f f f f f"
+          "a . . g e";
+
+        &-rating {
+          grid-area: a;
+          width: 4.5em;
+          height: 40%;
+          margin-top: 0;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-evenly;
+          margin-left: 0.5em;
+        }
+        &-img {
+          grid-area: b;
+          width: 3em;
+          justify-self: start;
+          margin-top: 0.5em;
+          margin-left: 1em;
+          img {
+            max-width: 100%;
+          }
+          // border: 1px solid tomato;
+        }
+        &-name {
+          grid-area: c;
+          justify-self: start;
+        }
+
+        &-time {
+          grid-area: d;
+          justify-self: center;
+        }
+        &-replay {
+          grid-area: e;
+          padding-bottom: 10%;
+        }
+
+        &-comment {
+          grid-area: f;
+          width: 90%;
+          margin-inline: auto;
+        }
+        .user-buttons {
+          grid-area: e;
+          justify-self: end;
+          align-self: center;
+          display: flex;
+          padding-bottom: 10%;
+          button {
+            margin-right: 0;
+            width: 5em;
+            border: none;
+            background-color: inherit;
+            font-size: 0.8em;
+            font-weight: 600;
+          }
+
+          button:nth-child(1) {
+            color: hsl(358, 79%, 66%);
+          }
+          button:nth-child(2) {
+            color: hsl(238, 40%, 52%);
+          }
+        }
+      }
+    }
+  }
+
+  .reply {
+    margin-left: 3%;
+    max-width: 90%;
+    position: relative;
+  }
+
+  .comment-area {
+    width: 96%;
+    min-height: 18vh;
+    margin-bottom: 1em;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+  }
+  .intend-bar {
+    left: -3%;
+  }
+  #edited-comment {
+    width: 100%;
+  }
 }

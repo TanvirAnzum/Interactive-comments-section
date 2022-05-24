@@ -223,10 +223,24 @@ function addComment(source, parentnode,is_reply) {
   img.id = "main-user-img";
   main_div.appendChild(img);
 
+
+  
+  
+
+
   let text_area = document.createElement("textarea");
   text_area.id = "usr-comment-text";
   text_area.setAttribute("rows", "6");
   text_area.setAttribute("placeholder", "Add a comment...");
+
+  ///if reply then adding main comment user name in the text area box 
+
+  if(is_reply) {
+    let mention = '@' + parentnode.childNodes[3].textContent ;
+    text_area.innerHTML = mention;
+  }
+
+
   main_div.appendChild(text_area);
   hover_event(text_area);
   let btn = document.createElement("button");
@@ -261,8 +275,8 @@ function replay_btn_toggle(reply, is_reply) {
     let num = id.replace(/\D/g,'');
     let new_num = parseInt(num) + parseInt(comment_count);
     let new_parent = document.getElementById('current-user-' + new_num);
-    console.log(new_parent);
-    ///comment area remove
+   
+    ///previous comment area remove
     let c_area = document.getElementsByClassName('comment-area');
     for(let i=0;i<c_area.length;i++) {
         c_area[i].style.display = "none";
@@ -302,6 +316,7 @@ function edit_event(node) {
   if(flag>0) return;
   let btns = node.parentNode;
   let main_div = btns.parentNode;
+  main_div.childNodes[6].style.display = 'none';
   let comment_area = main_div.childNodes[5];
   let exixting_comment = comment_area.textContent;
   comment_area.removeChild(comment_area.childNodes[0]);
