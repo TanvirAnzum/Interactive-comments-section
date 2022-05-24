@@ -15,9 +15,13 @@ fetch("./data.json")
   });
 
 function userInfo(user) {
-  addComment(user.image.webp, 'null');
+  addComment(user.image.webp, 'null');   //for adding comments 
 }
 
+
+
+
+///for extracting comments and replies from json object
 function comments(comment) {
   let comment_div_count = '0';
   for (let i = 0; i < comment.length; i++) {
@@ -57,6 +61,10 @@ function comments(comment) {
   }
 }
 
+
+
+
+/// create comment box 
 function elm(score, source, usrname, time, content, is_reply, current_user, no_of_replies) {
   let main_div = document.createElement("div");
   main_div.id = "current-user-" + current_user;
@@ -193,6 +201,10 @@ function elm(score, source, usrname, time, content, is_reply, current_user, no_o
   document.getElementsByClassName("container")[0].appendChild(main_div);
 }
 
+
+
+
+/// comment adding function
 function addComment(source, parentnode,is_reply) {
   let comment_area = document.createElement("div");
   comment_area.classList.add("comment-area");
@@ -236,6 +248,9 @@ function addComment(source, parentnode,is_reply) {
   }
 }
 
+
+
+/// work for reply button toggle
 function replay_btn_toggle(reply, is_reply) {
     // addComment('/images/icon-delete.svg');
     let comment_count = reply.value;
@@ -257,6 +272,7 @@ function replay_btn_toggle(reply, is_reply) {
 
 
 
+/// inserting node after another node funtion
 function insertAfter(referenceNode, newNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
